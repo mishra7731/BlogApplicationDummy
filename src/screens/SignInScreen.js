@@ -18,6 +18,7 @@ const SignInScreen = (props)=>{
 
        <Input
         placeholder = 'Password'
+        secureTextEntry = {true}
         leftIcon ={<MaterialCommunityIcons name="account-key" size={24} color="black" />}
        />
 

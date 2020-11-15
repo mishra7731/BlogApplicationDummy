@@ -1,11 +1,26 @@
 import React from "react";
-import {View, Button, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet, Text} from 'react-native';
+import {AuthContext} from "../provider/AuthProvider";
+import {Button} from 'react-native-elements';
+
 
 const WelcomeScreen = ()=>{
   return(
-    <View>
-      <Text>Welcome to Home!</Text>
-    </View>
+    <AuthContext> 
+      {(auth) => 
+        (<View>
+          <Text>Welcome to Home!</Text>
+
+          <Button
+            type = "solid"
+            title = "Log Out"
+            onPress = {function(){
+               auth.setIsLoggedIn(false);
+            
+            }}
+          />
+        </View>)}
+    </AuthContext>
   );
 }
 

@@ -3,7 +3,7 @@ import {View, StyleSheet} from 'react-native';
 import {Input, Button, Card} from "react-native-elements";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-
+import { FontAwesome } from '@expo/vector-icons';
 
 const SignUpScreen = (props)=>{
   return(

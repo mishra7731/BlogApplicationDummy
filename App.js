@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {NavigationContainer} from "@react-navigation/native";
+import {createStackNavigator} from "@react-navigation/stack";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+import WelcomeScreen from './src/screens/WelcomeScreen';
+import SignUpScreen from './src/screens/SignUpScreen';
+import SignInScreen from './src/screens/SignInScreen';
+
+const WelcomeStack = createStackNavigator();
+const AuthStack = createStackNavigator();
+
+const WelcomeStackScreen = () => { //alada rakhar karon hocche ei function ta ei midule er navigation return korbe
+  return(
+    <WelcomeStack.Navigator initialRouteName = 'Home'>
+      <WelcomeStack.Screen name = 'Welcome' component = {WelcomeScreen}/>
+    </WelcomeStack.Navigator>
+  );
+};
+
+const AuthStackScreen = () =>{
+  return(
+    <AuthStack.Navigator initialRouteName = 'SignIn'>
+      <AuthStack.Screen 
+        name = 'SignIn' 
+        component = {SignInScreen} 
+        options ={{headerShown: false}}
+      />
+      <AuthStack.Screen 
+        name = 'SignUp' 
+        component = {SignUpScreen}
+        options = {{headerShown: false}}
+      />
+    </AuthStack.Navigator>
+  )
+}
+
+function App(){
+  return(
+    <NavigationContainer>
+      <AuthStackScreen />
+      {/* <WelcomeStackScreen/> */}
+    </NavigationContainer>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

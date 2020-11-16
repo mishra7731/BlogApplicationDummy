@@ -4,8 +4,11 @@ import {Input, Button, Card} from "react-native-elements";
 import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {AuthContext} from "../provider/AuthProvider";
+import {getDataJSON} from "../functions/AsnycStorageFunctions";
 
 const SignInScreen = (props)=>{
+  const [Email, setEmail] = useState("");
+  const [Password, setPassword] = useState("");
   return(
     <AuthContext.Consumer>
       {(auth) => (<View style = {styles.viewStyle}>
@@ -15,22 +18,37 @@ const SignInScreen = (props)=>{
           <Input
             leftIcon ={<FontAwesome5 name="envelope-open-text" size={24} color="black" />}
             placeholder = 'E-mail Address'
+            onChangeText = {function(currentInput){
+              setEmail(currentInput);
+            
+             }}
           />
 
           <Input
             placeholder = 'Password'
             secureTextEntry = {true}
             leftIcon ={<MaterialCommunityIcons name="account-key" size={24} color="black" />}
+            onChangeText = {function(currentInput){
+              setPassword(currentInput);
+            
+             }}
           />
 
           <Button
             icon = {<MaterialCommunityIcons name="login" size={24} color="black" />}
             title = 'Sign In'
             type = 'solid'
-            onPress = {function ()
+            onPress = { async function ()           
               {
-                auth.setIsLoggedIn(true);
-                console.log("button clicked")
+                let UserData = await getDataJSON(Email);   
+                if(UserData.password == Password){   
+                  auth.setIsLoggedIn(true);
+                  auth.setCurrentUser(UserData);
+                }
+                else{
+                  alert("Login Failed");
+                  console.log(UserData); 
+                }
               }
             }
           />

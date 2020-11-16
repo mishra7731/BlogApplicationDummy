@@ -14,7 +14,7 @@ const AuthProvider = (props) => {
                 IsLoggedIn: IsLoggedIn,
                 setIsLoggedIn: setIsLoggedIn,
             }}
-        >  {/*shather value prop niye jabe jeta ekta object.. baki shb file er kache available hbe*/}
+        >  
             {props.children}
         </AuthContext.Provider>
     );

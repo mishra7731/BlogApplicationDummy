@@ -11,9 +11,9 @@ import {AuthContext, AuthProvider} from "./src/provider/AuthProvider";
 const WelcomeStack = createStackNavigator();
 const AuthStack = createStackNavigator();
 
-const WelcomeStackScreen = () => { //alada rakhar karon hocche ei function ta ei midule er navigation return korbe
+const WelcomeStackScreen = () => { 
   return(
-    <WelcomeStack.Navigator initialRouteName = 'Home'>
+    <WelcomeStack.Navigator initialRouteName = 'Welcome'>
       <WelcomeStack.Screen name = 'Welcome' component = {WelcomeScreen}/>
     </WelcomeStack.Navigator>
   );
@@ -40,13 +40,13 @@ const AuthStackScreen = () =>{
 
 function App(){
   return(
-    <AuthProvider> {/* pura navigation container is a child of auth provider */}
+    <AuthProvider>   
       <AuthContext.Consumer>
         {(auth) => (
-        <NavigationContainer> {/*auth is basically value property r object (oije 4 ta value) */}
+        <NavigationContainer> 
           {auth.IsLoggedIn ? <WelcomeStackScreen /> : <AuthStackScreen />}
         </NavigationContainer>)}
-      </AuthContext.Consumer> {/* karon app.js ba navigation nije e consumer, ok e is logged in ta check kora lagtece tai itself is a consumer */ }
+      </AuthContext.Consumer> 
     </AuthProvider>
     
   );

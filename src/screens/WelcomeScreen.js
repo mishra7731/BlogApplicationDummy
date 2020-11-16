@@ -6,21 +6,22 @@ import {Button} from 'react-native-elements';
 
 const WelcomeScreen = ()=>{
   return(
-    <AuthContext> 
+    <AuthContext.Consumer> 
       {(auth) => 
         (<View>
-          <Text>Welcome to Home!</Text>
+          <Text>Welcome</Text>
 
           <Button
             type = "solid"
             title = "Log Out"
             onPress = {function(){
                auth.setIsLoggedIn(false);
+               auth.setCurrentUser({});
             
             }}
           />
         </View>)}
-    </AuthContext>
+    </AuthContext.Consumer>
   );
 }
 

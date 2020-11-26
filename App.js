@@ -5,7 +5,7 @@ import {createStackNavigator} from "@react-navigation/stack";
 import WelcomeScreen from './src/screens/WelcomeScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import SignInScreen from './src/screens/SignInScreen';
-
+import NotificationScreen from "./src/screens/NotificationScreen";
 import {AuthContext, AuthProvider} from "./src/provider/AuthProvider";
 
 const WelcomeStack = createStackNavigator();

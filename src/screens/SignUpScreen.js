@@ -47,9 +47,9 @@ const SignUpScreen = (props)=>{
       />
 
       <Input
+       leftIcon ={<MaterialCommunityIcons name="account-key" size={24} color="black" />}
        placeholder = 'Password'
        secureTextEntry = {true}
-       leftIcon ={<MaterialCommunityIcons name="account-key" size={24} color="black" />}
        onChangeText = {function(currentInput){
         setPassword(currentInput);
       

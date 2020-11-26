@@ -1,15 +1,27 @@
-import React from "react";
-import {View, StyleSheet, Text} from 'react-native';
+import React, {useState} from "react";
+import {ScrollView, View, StyleSheet, Text} from 'react-native';
 import {AuthContext} from "../provider/AuthProvider";
-import {Button} from 'react-native-elements';
+import {
+  Button,
+  Card, 
+  Text,
+  Avator,
+  Input,
+  Header} from 'react-native-elements';
+import { StatusBar } from "expo-status-bar";
 
 
-const WelcomeScreen = ()=>{
+const WelcomeScreen = (props)=>{
   return(
     <AuthContext.Consumer> 
       {(auth) => 
-        (<View>
-          <Text>Welcome</Text>
+        (<View style = {styles.viewStyle}>
+          <StatusBar
+            hidden = {true}
+            backgroundColor = "blue"
+            barStyle = "light-content"
+          />
+          <Text style = {styles.TextStyle}>Welcome {auth.currentUser.name}</Text>
 
           <Button
             type = "solid"
@@ -27,10 +39,16 @@ const WelcomeScreen = ()=>{
 
 const styles = StyleSheet.create(
   {
-    textStyle: {
-      fontSize: 30,
-      color: "blue",
-    }
+    viewStyle: {
+      flex: 1, 
+      justifyContent:"center",
+      backgroundColor: "#4bacb8"
+      
+    },
+    TextStyle:{
+      fontSize: 25,
+      color: "black",
+    },
   } 
 
 );

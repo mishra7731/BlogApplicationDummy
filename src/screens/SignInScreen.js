@@ -5,15 +5,22 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import {AuthContext} from "../provider/AuthProvider";
 import {getDataJSON} from "../functions/AsnycStorageFunctions";
+import { StatusBar } from 'expo-status-bar';
 
 const SignInScreen = (props)=>{
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   return(
     <AuthContext.Consumer>
-      {(auth) => (<View style = {styles.viewStyle}>
+      {(auth) => 
+      (<View style = {styles.viewStyle}>
+        <StatusBar
+          hidden = {true}
+          backgroundColor = "blue"
+          barStyle = "light-content"
+        />
         <Card>
-          <Card.Title>Welcome to Auth App</Card.Title>
+          <Card.Title>Signed In</Card.Title>
           <Card.Divider/>
           <Input
             leftIcon ={<FontAwesome5 name="envelope-open-text" size={24} color="black" />}
@@ -25,9 +32,9 @@ const SignInScreen = (props)=>{
           />
 
           <Input
+            leftIcon ={<MaterialCommunityIcons name="account-key" size={24} color="black" />}
             placeholder = 'Password'
             secureTextEntry = {true}
-            leftIcon ={<MaterialCommunityIcons name="account-key" size={24} color="black" />}
             onChangeText = {function(currentInput){
               setPassword(currentInput);
             

@@ -3,6 +3,7 @@ import {useState} from "react";
 import {StyleSheet, Text, View} from "react-native";
 import {Header} from "react-native-elements";
 import { AuthContext } from "../provider/AuthProvider";
+import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const NotificationScreen = (props) => {

@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {View , StyleSheet, AsyncStorage} from "react-native";
+import {View , StyleSheet, AsyncStorage, Image, ScrollView} from "react-native";
 import {Text, Card, Button, Avatar, Header} from "react-native-elements";
 import {AuthContext} from "../provider/AuthProvider";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -31,34 +31,88 @@ const ProfileScreen = (props) => {
                          auth.setCurrentUser({});
              
                         }}
-                      />
+                       />
                      }
                   />
-                  <Card>
-                      <View style = {{
-                          flexDirection : "row",
-                          alignItems : "center"
-                      }}
-                      >
-                          <Avatar
-                            containerStyle = {{
-                                backgroundColor : "cyan"
-                            }}
-                            rounded icon = {{
-                                name: "thumbs-o-up" , type : "font-awesome", color: "black",
-                            }}
-                            activeOpacity = {1}
-                          />
-                          <Text style = {{ paddingHorizontal : 10}}>
-                              {auth.CurrentUser.name} Liked Your Post
 
-                          </Text>
-                      </View>
-                  </Card>
-                </View>
+                  <View>
+                     <Image source = {require('../../assets/PP.png')} style = {styles.dpStyle}/>
+                     <Text style = {styles.textStyle1}> Syeda Mishra Saiara </Text> 
+                  </View>
+                  
+                  <Button buttonStyle = {{
+                      backgroundColor : "blue",
+                      marginTop : 40, 
+                      marginLeft : 100,
+                      width: 200,
+                      borderRadius : 10
+                    }} 
+                    icon = {<MaterialCommunityIcons name="delete-empty" size={24} color="white" />}
+                    title = "Delete Profile"
+                    type = "solid"
+                  />
+
+                  <View style = {styles.viewStyle}>
+                      <Text style = {styles.textStyle2}>Born On : 3rd march, 1998</Text>
+                      <Text style = {styles.textStyle2}>Lives in : Dhaka, Bangladesh</Text>
+                      <Text style = {styles.textStyle2}>Studies at : Software Engineering, IUT, OIC</Text>
+                  </View>
+
+                  
+                </View> 
             )}
         </AuthContext.Consumer>
     )
 }
 
-export default ProfileScreen
+const styles = StyleSheet.create(
+    {
+        dpStyle :{
+            alignItems : "center",
+            alignContent : "center",
+            alignSelf : "center",
+            height : 300,
+            width : 200,
+            marginBottom : -20,
+            borderRadius : 500,
+        },
+
+        textStyle1 :{
+            fontSize : 30,
+            marginBottom : -20,
+            marginTop : 20,
+            paddingLeft : 50,
+            color : "blue",
+            alignItems : "center",
+        },
+
+        viewStyle :{
+            alignItems : "center",
+            justifyContent : "center",
+            fontSize : 15, 
+            color : "white",
+            width : 300,
+            paddingVertical : 10,
+            paddingHorizontal : 20,
+            backgroundColor : "#facdf8",
+            marginHorizontal : 50,
+            marginTop : 50
+            
+        },
+
+        textStyle2 : {
+            alignItems : "center",
+            justifyContent: "center",
+            paddingHorizontal : 20,
+            paddingVertical : 10,
+            fontSize : 15, 
+            color : "red",
+            width : 300,
+
+        }
+
+
+    }
+)
+
+export default ProfileScreen;

@@ -1,18 +1,29 @@
-import React, {useState} from "react";
-import {ScrollView, View, StyleSheet} from 'react-native';
+import React, {useState, useEffect} from "react";
+import {ScrollView, View, StyleSheet, FlatList} from 'react-native';
 import {AuthContext} from "../provider/AuthProvider";
 import { Button, Card, Avatar, Text, Input, Header} from 'react-native-elements';
 import { StatusBar } from "expo-status-bar";
-import { FontAwesome5 } from '@expo/vector-icons';
-import { FontAwesome } from '@expo/vector-icons'; 
-import { storeDataJSON } from "../functions/AsnycStorageFunctions";
-import { color } from "react-native-reanimated";
-import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
-import PostComponent from "../components/PostComponent";
+import { FontAwesome5, FontAwesome, AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+ 
+import { storeDataJSON, getDataJSON, removeData} from "../functions/AsnycStorageFunctions";
 
+
+import PostComponent from "../components/PostComponent";
+import moment from "moment";
 
 const WelcomeScreen = (props)=>{
+  const [postText, setPostText] = useState("");
+  const [postList, setPostList] = useState([]);
 
+  useEffect (() => {
+    const getData = async () => {
+      setPostList (await getDataJSON('posts'));
+    }
+    getData();
+
+  }, []
+
+  )
   
   return(
     <AuthContext.Consumer> 
@@ -22,7 +33,6 @@ const WelcomeScreen = (props)=>{
           <Header
             containerStyle = {{
               backgroundColor : "#939fcf",
-              justifyContent : "space-around",
             }}
             leftComponent = {
               <AntDesign name="menuunfold" size={24} color="white" 
@@ -50,18 +60,66 @@ const WelcomeScreen = (props)=>{
               multiline = {true}
               leftIcon = 
               {<FontAwesome5 name="pen-fancy" size={24} color="black" />}
-              onPress = { function () {}}
+              onChangeText = {function (currentInput) {
+                setPostText (currentInput);
+              }
+              
+              }
             />
 
             <Button
              title = "Post" buttonStyle = {{width : 80, alignSelf : "flex-start"}}
-             onPress = {function () {}}
+             onPress = { async () => {
+               if (postList != null){
+                 setPostList(posts => [
+                   ...posts,
+                   {
+                     name : auth.CurrentUser.name,
+                     email : auth.CurrentUser.email,
+                     date : moment().format("DD MMM, YYYY"),
+                     post : postText,
+                     key : postText,
+                   },
+                 ]);
+               }
+
+               else {
+                 const arr = [];
+                 arr.push({
+                   name : auth.CurrentUser.name,
+                   email: auth.CurrentUser.email,
+                   date : moment().format("DD MMM, YYYY"),
+                   post : postText,
+                   key : postText,
+                 });
+                 setPostList(arr);
+               }
+
+               await storeDataJSON('posts', postList);
+             }
+
+             }
+            />
+
+            <Button
+              title = "Delete Post"
+              type = "solid"
+              onPress = {async function () {
+                await removeData("Post");
+              }}
             />
    
           </Card>
-          <ScrollView>
-            <PostComponent name = "Mishra" date = "28 Nov,2020" post = "Life is hitting hard"/>
-          </ScrollView>
+          <FlatList
+            data = {postList}
+            renderItem = {postItem => (
+              <PostComponent
+                name = {postItem.item.name}
+                date = {postItem.item.date}
+                post = {postItem.item.post}
+              />
+            )}
+          />
           
         </View>)}
     </AuthContext.Consumer>

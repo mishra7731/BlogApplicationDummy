@@ -1,11 +1,12 @@
 import React, {useState} from "react";
-import {View , StyleSheet, AsyncStorage, Image, ScrollView} from "react-native";
+import {View , StyleSheet, Image, ScrollView} from "react-native";
 import {Text, Card, Button, Avatar, Header} from "react-native-elements";
 import {AuthContext} from "../provider/AuthProvider";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const ProfileScreen = (props) => {
+    console.log(props);
     return (
         <AuthContext.Consumer>
             {(auth) => 

@@ -29,6 +29,7 @@ const WelcomeScreen = (props)=>{
     <AuthContext.Consumer> 
       {(auth) => 
         (<View>
+        <ScrollView> 
           <StatusBar />
           <Header
             containerStyle = {{
@@ -101,7 +102,7 @@ const WelcomeScreen = (props)=>{
              }
             />
 
-            <Button
+            <Button buttonStyle = {{width : 150, alignSelf : "center", marginTop : 50}}
               title = "Delete Post"
               type = "solid"
               onPress = {async function () {
@@ -120,7 +121,7 @@ const WelcomeScreen = (props)=>{
               />
             )}
           />
-          
+          </ScrollView>
         </View>)}
     </AuthContext.Consumer>
   );

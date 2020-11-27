@@ -20,7 +20,7 @@ const SignInScreen = (props)=>{
           barStyle = "light-content"
         />
         <Card>
-          <Card.Title>Signed In</Card.Title>
+          <Card.Title>Welcome to Blog App</Card.Title>
           <Card.Divider/>
           <Input
             leftIcon ={<FontAwesome5 name="envelope-open-text" size={24} color="black" />}
@@ -48,7 +48,7 @@ const SignInScreen = (props)=>{
             onPress = { async function ()           
               {
                 let UserData = await getDataJSON(Email);   
-                if(UserData.password == Password){   
+                if(UserData !=null && UserData.password == Password){   
                   auth.setIsLoggedIn(true);
                   auth.setCurrentUser(UserData);
                 }

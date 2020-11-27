@@ -10,11 +10,10 @@ const ProfileScreen = (props) => {
         <AuthContext.Consumer>
             {(auth) => 
             (
-                <View>
+                <View style = {styles.viewStyle1}>
                    <Header
                      containerStyle = {{
                      backgroundColor : "#939fcf",
-                     justifyContent : "space-around",
                     }}
                     leftComponent = {
                      <AntDesign name="menuunfold" size={24} color="white" 
@@ -43,7 +42,7 @@ const ProfileScreen = (props) => {
                   <Button buttonStyle = {{
                       backgroundColor : "blue",
                       marginTop : 40, 
-                      marginLeft : 100,
+                      marginLeft : 20,
                       width: 200,
                       borderRadius : 10
                     }} 
@@ -81,7 +80,7 @@ const styles = StyleSheet.create(
             fontSize : 30,
             marginBottom : -20,
             marginTop : 20,
-            paddingLeft : 50,
+            paddingLeft : 30,
             color : "blue",
             alignItems : "center",
         },
@@ -97,7 +96,7 @@ const styles = StyleSheet.create(
             backgroundColor : "#facdf8",
             marginHorizontal : 50,
             marginTop : 50
-            
+
         },
 
         textStyle2 : {
@@ -109,8 +108,14 @@ const styles = StyleSheet.create(
             color : "red",
             width : 300,
 
-        }
+        },
+        viewStyle1 : {
+            flex : 1,
+            alignItems : "center",
+            alignSelf : "center",
+            backgroundColor : "#ecf7cd",
 
+        },
 
     }
 )

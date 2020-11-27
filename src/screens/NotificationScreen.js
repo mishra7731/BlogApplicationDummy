@@ -1,9 +1,11 @@
 import React from "react";
 import {useState} from "react";
-import {StyleSheet, Text, View} from "react-native";
-import {Header} from "react-native-elements";
+import {StyleSheet, View, AsyncStorage} from "react-native";
+import {Header, Text, Card, Avatar} from "react-native-elements";
 import { AuthContext } from "../provider/AuthProvider";
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
+
+import { Entypo } from '@expo/vector-icons';
 
 
 const NotificationScreen = (props) => {
@@ -20,23 +22,40 @@ const NotificationScreen = (props) => {
                     leftComponent = {
                      <AntDesign name="menuunfold" size={24} color="white" 
                        onPress = {() => {
-                        navigation.openDrawer();
+                        props.navigation.openDrawer();
                        }}/>
                     }
                     centerComponent = {{text : "Home", style: {color : "#ffffff"}}}
                     rightComponent = 
                      {
                        <MaterialCommunityIcons name="logout-variant" size={24} color="white" 
-                       onPress = {function(){
+                        onPress = {() => {
                          auth.setIsLoggedIn(false);
                          auth.setCurrentUser({});
              
-                       }}
+                        }}
                       />
                      }
                   />
-         
-                   <Text style = {styles.TextStyle}>Welcome {auth.currentUser.name}</Text>
+                  <Card>
+                      <View style = {{
+                          flexDirection : "row",
+                          alignItems : "center"
+                      }}
+                      >
+                          <Avatar
+                            containerStyle={{ backgroundColor: "#ffab91" }}
+                            rounded
+                            icon={{ name: "user", type: "font-awesome", color: "white" }}
+                            activeOpacity={1}
+                            />
+                          <Text style = {{ paddingHorizontal : 10}}>
+                              Pam liked your post
+
+                          </Text>
+
+                      </View>
+                  </Card>
                </View>
 
            )}

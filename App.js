@@ -13,6 +13,7 @@ import SignUpScreen from './src/screens/SignUpScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import NotificationScreen from "./src/screens/NotificationScreen";
 import {AuthContext, AuthProvider} from "./src/provider/AuthProvider";
+import ProfileScreen from './src/screens/ProfileScreen';
 
 
 const AuthStack = createStackNavigator();
@@ -21,8 +22,10 @@ const Drawer = createDrawerNavigator();
 
 const DrawerScreens = () => {
   return(
-    <Drawer.Navigator initialRouteName = "Welcome">
+    <Drawer.Navigator drawerStyle = {{backgroundColor : "#81baf0"}}>
       <Drawer.Screen name = "Welcome" component = {WelcomeScreenTab} />
+      <Drawer.Screen name = "Profile" component = {ProfileScreen} />
+
     </Drawer.Navigator>
   );
 }
@@ -33,23 +36,32 @@ const WelcomeScreenTab = () => {
       initialRouteName = "Welcome"
       activeColor = "#030659"
       shifting = {true}>
-      <WelcomeStack.Screen name = "Welcome" 
+      <WelcomeTab.Screen 
+        name = "Welcome" 
         component = {WelcomeScreen}
         options = {{
           tabBarLabel : "Welcome",
           tabBarColor : "#1a8bab",
-          tabBarIcon : ({color}) => (
-            <MaterialCommunityIcons name="home-heart" size={24} color="black" />
+          tabBarIcon : ({focused}) => 
+          focused ? (
+            <MaterialCommunityIcons name="home-heart" size={24} color="white" />
+          ) : (
+            <MaterialCommunityIcons name="home-lock" size={24} color="black" />
           ),
         }}
       />
-      <WelcomeTab.Screen name = "Notification"
+      <WelcomeTab.Screen 
+        name = "Notification"
         component = {NotificationScreen}
         options = {{
           tabBarLabel : "Notification",
           tabBarColor : "#067bc9",
-          tabBarIcon : ({color}) => (
-            <Ionicons name="md-notifications" size={24} color="black" />
+          tabBarIcon : ({focused}) => 
+          focused ? (
+            <Ionicons name="md-notifications" size={24} color="white" />
+          ) :
+          (
+            <Ionicons name="md-notifications-outline" size={24} color="white" />
           ),
 
         }}
@@ -58,7 +70,6 @@ const WelcomeScreenTab = () => {
   );
 };
 
-                 //Auth flow
 
 const AuthStackScreen = () =>{         
   return(

@@ -15,15 +15,23 @@ const WelcomeScreen = (props)=>{
   const [postText, setPostText] = useState("");
   const [postList, setPostList] = useState([]);
 
+  const getData = async () => {
+    await getDataJSON ("posts").then ((data) => {
+      if (data == null) {
+        setPostList ([]);
+  
+      }
+      else{
+        setPostList(data);
+      }
+    });
+    
+  };
+
   useEffect (() => {
-    const getData = async () => {
-      setPostList (await getDataJSON('posts'));
-    }
     getData();
 
-  }, []
-
-  )
+  }, [])
   
   return(
     <AuthContext.Consumer> 
@@ -71,43 +79,23 @@ const WelcomeScreen = (props)=>{
             <Button
              title = "Post" buttonStyle = {{width : 80, alignSelf : "flex-start"}}
              onPress = { async () => {
-               if (postList != null){
-                 setPostList(posts => [
-                   ...posts,
-                   {
-                     name : auth.CurrentUser.name,
-                     email : auth.CurrentUser.email,
-                     date : moment().format("DD MMM, YYYY"),
-                     post : postText,
-                     key : postText,
-                   },
-                 ]);
-               }
+               let arr = [
+                 ...postList,
+                 {
+                  name : auth.CurrentUser.name,
+                  email: auth.CurrentUser.email,
+                  date : moment().format("DD MMM, YYYY"),
+                  post : postText,
+                  key : postText,
 
-               else {
-                 const arr = [];
-                 arr.push({
-                   name : auth.CurrentUser.name,
-                   email: auth.CurrentUser.email,
-                   date : moment().format("DD MMM, YYYY"),
-                   post : postText,
-                   key : postText,
-                 });
-                 setPostList(arr);
-               }
-
-               await storeDataJSON('posts', postList);
-             }
-
-             }
-            />
-
-            <Button buttonStyle = {{width : 150, alignSelf : "center", marginTop : 50}}
-              title = "Delete Post"
-              type = "solid"
-              onPress = {async function () {
-                await removeData("Post");
-              }}
+                 },
+               ];
+                   
+               await storeDataJSON('posts', arr).then(() => {
+                setPostList(arr);
+               });
+                            
+             }}
             />
    
           </Card>
@@ -122,7 +110,8 @@ const WelcomeScreen = (props)=>{
             )}
           />
           </ScrollView>
-        </View>)}
+        </View>
+        )}
     </AuthContext.Consumer>
   );
 }

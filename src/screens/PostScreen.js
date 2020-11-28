@@ -90,7 +90,10 @@ const PostScreen = (props) => {
                                     setCommentText(currentInput);
                                 }}
                             />
+<<<<<<< HEAD
                             
+=======
+>>>>>>> 8fe3ac66eb73d5b4556c7cdf283fb95d751f03c6
                             <Button
                                 title = "Comment" 
                                 buttonStyle = 

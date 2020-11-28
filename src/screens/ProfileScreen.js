@@ -6,7 +6,7 @@ import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 const ProfileScreen = (props) => {
-    console.log(props);
+    
     return (
         <AuthContext.Consumer>
             {(auth) => 
@@ -37,7 +37,7 @@ const ProfileScreen = (props) => {
 
                   <View>
                      <Image source = {require('../../assets/PP.png')} style = {styles.dpStyle}/>
-                     <Text style = {styles.textStyle1}> Syeda Mishra Saiara </Text> 
+                     <Text style = {styles.textStyle1}> {auth.CurrentUser.name} </Text> 
                   </View>
                   
                   <Button buttonStyle = {{

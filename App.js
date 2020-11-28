@@ -12,13 +12,16 @@ import WelcomeScreen from './src/screens/WelcomeScreen';
 import SignUpScreen from './src/screens/SignUpScreen';
 import SignInScreen from './src/screens/SignInScreen';
 import NotificationScreen from "./src/screens/NotificationScreen";
-import {AuthContext, AuthProvider} from "./src/provider/AuthProvider";
 import ProfileScreen from './src/screens/ProfileScreen';
+import PostScreen from './src/screens/PostScreen';
 
+import {AuthContext, AuthProvider} from "./src/provider/AuthProvider";
 
 const AuthStack = createStackNavigator();
 const WelcomeTab = createMaterialBottomTabNavigator();
 const Drawer = createDrawerNavigator();
+const WelcomeStack = createStackNavigator();
+const CommentPostStack = createStackNavigator();
 
 const DrawerScreens = () => {
   return(
@@ -30,6 +33,15 @@ const DrawerScreens = () => {
   );
 }
 
+const WelcomePostStackScreen = () => {
+  return(
+    <WelcomeStack.Navigator initialRouteName = "Welcome">
+      <WelcomeStack.Screen name = "Welcome" component = {WelcomeScreen} options = {{headerShown : false}}/>
+      <WelcomeStack.Screen name = "IndividualPost" component = {PostScreen} options = {{headerShown : false}}/>
+    </WelcomeStack.Navigator>
+  )
+}
+
 const WelcomeScreenTab = () => { 
   return(
     <WelcomeTab.Navigator 
@@ -38,7 +50,7 @@ const WelcomeScreenTab = () => {
       shifting = {true}>
       <WelcomeTab.Screen 
         name = "Welcome" 
-        component = {WelcomeScreen}
+        component = {WelcomePostStackScreen}
         options = {{
           tabBarLabel : "Welcome",
           tabBarColor : "#1a8bab",
